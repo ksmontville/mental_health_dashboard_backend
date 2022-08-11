@@ -1,0 +1,122 @@
+@import "./base.css";
+
+#app {
+  background-color: yellow;
+  max-width: 1280px;
+  /*margin: 0 auto;*/
+  /*padding: 1rem;*/
+  font-weight: normal;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#mainWrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: green;
+}
+
+body {
+  background-color: black;
+}
+
+
+header {
+  background-color: blue;
+  min-width: 100vw;
+}
+
+ul {
+  list-style: none;
+  margin: 1.2vw;
+  padding: 1.2vw;
+}
+
+.page-header {
+  color: orange;
+  text-align: center;
+  padding: 4.8vw;
+}
+
+.navbar {
+  padding: 1vw;
+}
+
+main {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  font-size: 4vw;
+  background-color: pink;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.content {
+}
+
+.get-started {
+  background-color: orange;
+}
+
+.dashboard {
+  background-color: white;
+}
+
+.features {
+  background-color: purple;
+}
+
+.about {
+  background-color: teal;
+}
+
+.task-list__input {
+  border: none;
+  border-bottom: 2px solid lightpink;
+}
+
+footer {
+  text-align: center;
+  margin-top: auto;
+  min-width: 100vw;
+  background-color: red;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+/*@media (min-width: 1024px) {*/
+/*!*  body {*!*/
+/*!*    background-color: white;*!*/
+/*!*  }*!*/
+
+/*!*  #mainWrapper {*!*/
+/*!*  }*!*/
+
+/*!*  #app {*!*/
+/*!*    *!*/
+/*!*  }*!*/
+/*!*}*!*/
