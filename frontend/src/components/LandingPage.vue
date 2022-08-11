@@ -1,23 +1,33 @@
 <template>
 
   <section v-if="!isAuthenticated" class="content get-started" id="getStarted">
-    <p>Get started today</p>
+    <h2>Get started today</h2>
+    <p>Start tracking your mental health with curated exercises recommended by real medical professionals!</p>
   </section>
 
   <section v-if="!isAuthenticated" class="content features" id="features">
-    <p>Features about app</p>
+    <h2>Features about app</h2>
+    <ul>
+      <li>
+        Keep track of your mental health with daily, weekly, monthly, and yearly statistics
+      </li>
+      <li>
+        Send messages directly to your provider
+      </li>
+      <li>
+        Share your progress on social media
+      </li>
+    </ul>
   </section>
 
-  <section v-if="!isAuthenticated" class="content about" id="about">
-    <p>About Liza</p>
+  <section v-if="!isAuthenticated" class="content about" id="missionStatement">
+    <h2>Mission Statement</h2>
+    <p>Dr. Liza Ignatova is a fully licenced and certified practicing pediatrician specializing in adolescent mental health and well-being.</p>
   </section>
 
   <Transition>
   <section v-if="isAuthenticated" class="content dashboard" id="dashboard">
-      <h2>My Profile -- Hello, {{ user.nickname}}!</h2>
-      <h3>Last Active: {{ lastActivity }} </h3>
       <user-dashboard />
-
   </section>
   </Transition>
 
@@ -27,7 +37,6 @@
 <script>
 import { useAuth0 } from '@auth0/auth0-vue';
 import UserDashboard from './UserDashboard.vue';
-import axios from "axios";
 
 export default {
   name: "LandingPage",
@@ -37,21 +46,8 @@ export default {
   },
 
   setup() {
-    const lastActivityDate = new Date().toLocaleDateString()
-    const lastActivityTime = new Date().toLocaleTimeString()
-    const lastActivity = `${lastActivityDate}, ${lastActivityTime}`
-
-    const API_URL = 'http://localhost:8000';
-    const { getAccessTokenSilently } = useAuth0();
     const {user, isAuthenticated} = useAuth0();
-
-    return {user, isAuthenticated, lastActivity}
-  },
-
-  // data() {
-  // },
-
-  methods: {
+    return {user, isAuthenticated}
   },
 }
 

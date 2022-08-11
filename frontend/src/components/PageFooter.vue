@@ -1,16 +1,22 @@
 <template>
+    <span class="footer__span">Contact Us!</span>
 
   <form class="footer__form">
-    <p>Contact</p>
-    <label for="name">Name: </label>
-    <input class="footer__form--input" type="text" id="name" name="name"><br>
-    <label for="email">Email: </label>
-    <input class="footer_form--input" type="text"  id="email" name="email"><br>
-    <label for="message">Message: </label>
-    <textarea class="footer__form--input-large" type="text" id="message" name="message"></textarea>
+    <span>
+      <label for="name">Name:</label>
+      <input class="footer__form--input" type="text" id="name" name="name" placeholder="Your Name">
+    </span>
+    <span>
+      <label for="email">Email:</label>
+      <input class="footer__form--input" type="text"  id="email" name="email" placeholder="Your Email">
+    </span>
+    <span>
+      <label for="message">Message:</label>
+      <textarea class="footer__form--input" type="text" id="message" name="message" placeholder="What can we help you with?"></textarea>
+    </span>
   </form>
 
-  <h6>Dr. Liza Ignatova, &copy; 2022-2023 | <a href="#" target="_blank">Privacy Policy</a> </h6>
+  <span class="footer__span">Dr. Liza Ignatova, &copy; 2022-2023 | <a href="#" target="_blank">Privacy Policy</a></span>
 
 
 

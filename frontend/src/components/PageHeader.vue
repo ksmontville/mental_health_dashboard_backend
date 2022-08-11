@@ -1,18 +1,19 @@
 <template>
-  <h1 class="page-header">I am the page header.</h1>
+  <h1 class="page-header">Cool Mental Health Image</h1>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">My Mental Health</a>
+      <a class="navbar-brand" href="#">#mentalHealth</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarToggler">
         <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="#">Home</a>
-        <a class="nav-link" href="#">Link 1</a>
-        <a class="nav-link" href="#">Link 2</a>
+        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="#">Media</a>
+        <a class="nav-link" href="#">Resources</a>
         <a v-if:="isAuthenticated" v-on:click="logout" class="nav-link" href="#">Log Out</a>
-          <a v-else v-on:click="login" class="nav-link" href="#">Log In</a>
+          <a v-else v-on:click="login" class="nav-link" href="#">Register / Log In</a>
         </div>
       </div>
     </div>
