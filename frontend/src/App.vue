@@ -12,7 +12,12 @@ import TaskList from './components/TaskList.vue';
     </header>
 
     <main>
-      <router-view />
+      <Suspense>
+        <router-view />
+        <template #fallback>
+          <span>There was an error.</span>
+        </template>
+      </Suspense>
     </main>
 
     <footer>

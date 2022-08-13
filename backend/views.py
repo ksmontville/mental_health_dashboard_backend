@@ -17,7 +17,7 @@ def public(request):
     return JsonResponse(dict(message=response))
 
 
-@require_auth(None)
+# @require_auth(None)
 def private(request):
     """A valid access token is required to access this route
     """
