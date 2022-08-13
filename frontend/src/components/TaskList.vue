@@ -7,6 +7,7 @@
 
       <section v-show="!isHidden" class="content addForm">
         <form ref="addTaskForm" v-on:submit.prevent="postTask">
+          <input v-model="user.sub" type="hidden" ref="auth0IDInput" name="auth0ID">
 
           <br><label for="activity">Activity</label><br>
           <input v-model="task.title" type="text" ref="activityInput" name="activity"><br>
@@ -26,25 +27,29 @@
 
   <div>
       <ul class="taskList">
-        <li v-for="(task) in tasks[0]" :key="task.id">
-          <div class="taskList__child">
+        <li v-for="(task) in tasks[0]" :key="task.owner">
+          <div v-if="user.sub === task.owner">
+            <div class="taskList__child">
 
-            <br><label for="activity">Activity</label><br>
-            <input class="taskList__input" v-model="task.title" type="text" id="activity" name="activity" v-bind:readonly="!task.canEdit"><br>
+              <br><label for="activity">Activity</label><br>
+              <input class="taskList__input" v-model="task.title" type="text" id="activity" name="activity" v-bind:readonly="!task.canEdit"><br>
 
-            <label for="description">Description</label><br>
-            <textarea class="taskList__input" v-model="task.description" type="text" id="description" name="description" v-bind:readonly="!task.canEdit"></textarea><br>
+              <label for="description">Description</label><br>
+              <textarea class="taskList__input" v-model="task.description" type="text" id="description" name="description" v-bind:readonly="!task.canEdit"></textarea><br>
 
-            <label for="duration">Duration (minutes)</label><br>
-            <input class="taskList__input" v-model="task.duration" type="text" id="duration" name="duration" v-bind:readonly="!task.canEdit"><br>
+              <label for="duration">Duration (minutes)</label><br>
+              <input class="taskList__input" v-model="task.duration" type="text" id="duration" name="duration" v-bind:readonly="!task.canEdit"><br>
 
-            <h6>Created: {{ task.created.slice(0, 10) }}</h6>
-            <h6>Complete: <input type="checkbox" @click="markTaskComplete(task)" v-model="task.completed" id="isComplete" name="isComplete"></h6>
+              <h6>Created: {{ task.created.slice(0, 10) }}</h6>
+              <span>Complete: <input type="checkbox" @click="markTaskComplete(task)" v-model="task.completed" id="isComplete" name="isComplete">
+                <label v-if="task.completed">{{ task.date_completed }}</label>
+              </span><br>
 
-            <button v-if="!task.canEdit" @click="task.canEdit = !task.canEdit" id="editButton">Edit</button>
-            <button v-else @click="editTask(task).then(toggleCanEdit)" id="submitButton">Submit</button>
-            <button @click="deleteTask(task)">Remove</button><br>
+              <button v-if="!task.canEdit" @click="task.canEdit = !task.canEdit" id="editButton">Edit</button>
+              <button v-else @click="editTask(task).then(toggleCanEdit)" id="submitButton">Submit</button>
+              <button @click="deleteTask(task)">Remove</button><br>
 
+            </div>
           </div>
         </li>
       </ul>
@@ -64,14 +69,16 @@ export default {
   name: "TaskList",
 
   setup() {
-    const {getAccessTokenSilently} = useAuth0();
+    const {user, getAccessTokenSilently} = useAuth0();
     const tasks = reactive([])
     const task = {
       'id': '',
+      'owner': '',
       'title': '',
       'description': '',
       'duration': '',
       'completed': '',
+      'date_completed': '',
       'canEdit': false,
     }
 
@@ -94,9 +101,11 @@ export default {
       try {
         const token = await getAccessTokenSilently();
         const response = await axios.post(`${API_URL}/api/tasks/`, {
+          'owner': user.value.sub,
           'title': task.title,
           'description': task.description,
           'duration': task.duration,
+          'date_completed': 'null'
         }, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -129,9 +138,12 @@ export default {
       try {
         const token = await getAccessTokenSilently();
         await axios.put(`${API_URL}/api/tasks/${task.id}`, {
+          'owner': user.value.sub,
           'title': task.title,
+          'description': task.description,
           'duration': task.duration,
           'completed': task.completed,
+          'date_completed': task.date_completed,
         }, {
           headers: {
             Authorization: `Bearer ${token}`
@@ -146,20 +158,22 @@ export default {
       try {
         const token = await getAccessTokenSilently();
         await axios.put(`${API_URL}/api/tasks/${task.id}`, {
+          'owner': user.value.sub,
           'title': task.title,
           'duration': task.duration,
           'completed': !task.completed,
+          'date_completed': new Date().toLocaleString()
         }, {
           headers: {
             Authorization: `Bearer ${token}`
           }
-        });
+        }); await getTasks()
       } catch(error){
         console.log(error)
       }
     }
 
-      return {tasks, task, isHidden, canEdit, postTask, editTask, deleteTask, markTaskComplete}
+      return {user, tasks, task, isHidden, canEdit, postTask, editTask, deleteTask, markTaskComplete}
 
   },
   methods: {

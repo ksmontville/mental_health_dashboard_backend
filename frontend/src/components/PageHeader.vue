@@ -8,7 +8,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarToggler">
         <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link active" aria-current="page" href="/">Home</a>
         <a class="nav-link" href="#">About</a>
         <a class="nav-link" href="#">Media</a>
         <a class="nav-link" href="#">Resources</a>
