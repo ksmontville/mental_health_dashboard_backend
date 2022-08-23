@@ -1,8 +1,9 @@
 <template>
 
   <section v-if="isAuthenticated">
-    <h2>My Profile -- Hello, {{ user.nickname }}!</h2>
-        <h3>Last Login: {{ user.updated_at.slice(0, 10) }}</h3>
+    <h2>Hello, {{ displayName }}!</h2>
+    <h3>Last Login: {{ user.updated_at.slice(0, 10) }}</h3>
+    <a href="/profile">Edit Profile</a>
   </section>
 
     <section id="tasks">
@@ -17,6 +18,8 @@ import {useAuth0} from "@auth0/auth0-vue";
 import axios from "axios";
 import {reactive, ref} from "vue";
 
+const MANAGEMENT_API = "http://localhost:8000/api/users/management"
+
 export default {
   name: "UserDashboard",
 
@@ -25,15 +28,23 @@ export default {
   },
 
   async setup() {
-    const {user, isAuthenticated} = useAuth0();
+    const {user, isAuthenticated, getAccessTokenSilently} = useAuth0();
 
-    const userEmail = user.value.email
-    const userAuth0ID = user.value.sub
+    const displayName = ref('')
 
-    // console.log(userEmail)
-    // console.log(userAuth0ID)
+    await getDisplayName()
 
-    return {user, isAuthenticated}
+     async function getDisplayName() {
+      const token = await getAccessTokenSilently();
+      const response = await axios.get(`${MANAGEMENT_API}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      displayName.value = response.data[0].user_metadata.display_name
+    }
+
+    return {user, isAuthenticated, displayName}
   },
 }
 
