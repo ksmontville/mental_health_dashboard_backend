@@ -1,6 +1,11 @@
 from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
 from authlib.integrations.django_oauth2 import ResourceProtector
 from backend import validator
+from .models import User
+from .seralizers import UserSerializer
+import requests as r
 
 require_auth = ResourceProtector()
 validator = validator.Auth0JWTBearerTokenValidator(
@@ -10,17 +15,37 @@ validator = validator.Auth0JWTBearerTokenValidator(
 require_auth.register_token_validator(validator)
 
 
-def not_protected(request):
-    response_dict = {'response': 'Any user may request this data.'}
-    return JsonResponse(data=response_dict)
+@csrf_exempt
+def management(request):
 
+    management_url = 'https://django-rest-api.us.auth0.com/api/v2'
 
-def protected(request):
-    response_dict = {'response': 'Users who are logged in may request this data.'}
-    return JsonResponse(data=response_dict)
+    request_token_url = 'https://django-rest-api.us.auth0.com/oauth/token'
+    headers = {'content-type': 'application/json'}
+    payload = '{"client_id":"YQnrMDwuUxul4E6YmQtvWHgS283lMN4Y",' \
+              '"client_secret":"fX-FO7C77Vs5sGC9WjA2WmMjZIoeaALWD0xc9gFuofsjXtRf90xfZKDP7BfC9dg_",' \
+              f'"audience":"{management_url}/",' \
+              '"grant_type":"client_credentials"}'
 
+    response = r.post(url=request_token_url, headers=headers, data=payload)
 
-@require_auth(None)
-def protected_with_auth(request):
-    response_dict = {'response': 'Users must be logged in and have correct authorization to request this data.'}
-    return JsonResponse(data=response_dict)
+    data = response.json()
+    token = response.json()['access_token']
+
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'contentType': 'application/json'
+    }
+
+    if request.method == 'GET':
+        response = r.get(url=f'{management_url}/users', headers=headers)
+        data = response.json()
+        return JsonResponse(data, status=201, safe=False)
+
+    elif request.method == 'PATCH':
+        user_data = JSONParser().parse(request)
+
+        response = r.patch(url=f'{management_url}/users/auth0|62ed6112c0c6c7196cf4df7c', headers=headers, data=user_data)
+        data = response.json()
+        return JsonResponse(data, status=201, safe=False)
+
