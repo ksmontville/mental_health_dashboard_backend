@@ -13,8 +13,8 @@
           <router-link to="#" class="nav-link">About</router-link>
           <router-link to="#" class="nav-link">Media</router-link>
           <router-link to="#" class="nav-link">Resources</router-link>
-          <router-link to="/" v-if="isAuthenticated" class="nav-link">Log Out</router-link>
-          <router-link to="/dashboard" v-else class="nav-link">Register / Log In</router-link>
+          <router-link to="/" v-if="isAuthenticated" class="nav-link" @click="logout">Log Out</router-link>
+          <router-link to="/dashboard" v-else class="nav-link" @click="login">Register / Log In</router-link>
         </div>
       </div>
     </div>

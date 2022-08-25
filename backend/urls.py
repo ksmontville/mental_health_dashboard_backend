@@ -19,10 +19,6 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/public/', views.public),
-    path('api/private/', views.private),
-    path('api/private-scoped/', views.private_scoped),
-    path('api/test/', views.test),
     path('api/', include('users.urls')),
     path('api/', include('tasks.urls')),
 ]

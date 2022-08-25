@@ -10,19 +10,31 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
-from decouple import config
+from dotenv import load_dotenv, find_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-uek&l55l553t)_)ajfyc9gu^jqd6p^j&&k*515o)(9d^^_5p@f'
+load_dotenv(find_dotenv())
+APP_DOMAIN = os.environ['APP_DOMAIN']
+APP_CLIENT_ID = os.environ['APP_CLIENT_ID']
+APP_CLIENT_SECRET = os.environ['APP_CLIENT_SECRET']
+APP_URL = os.environ['APP_URL']
 
+MANAGEMENT_URL = os.environ['MANAGEMENT_URL']
+MANAGEMENT_CLIENT_ID = os.environ['MANAGEMENT_CLIENT_ID']
+MANAGEMENT_CLIENT_SECRET = os.environ['MANAGEMENT_CLIENT_SECRET']
+
+PAYLOAD = os.environ['PAYLOAD']
+TOKEN_REQUEST_URL = os.environ['REQUEST_TOKEN_URL']
+
+SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -171,10 +183,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:8000',
-#     'http://localhost:5174',
-#     'http://localhost:5173',
-# ]
-
