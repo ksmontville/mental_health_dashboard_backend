@@ -25,25 +25,13 @@
     <p>Dr. Liza Ignatova is a fully licenced and certified practicing pediatrician specializing in adolescent mental health and well-being.</p>
   </section>
 
-<!--  <Transition>-->
-<!--  <section v-if="isAuthenticated" class="content dashboard" id="dashboard">-->
-<!--      <user-dashboard />-->
-<!--  </section>-->
-<!--  </Transition>-->
-
-
 </template>
 
 <script>
 import { useAuth0 } from '@auth0/auth0-vue';
-import UserDashboard from './UserDashboard.vue';
 
 export default {
   name: "LandingPage",
-
-  components: {
-    'user-dashboard': UserDashboard
-  },
 
   setup() {
     const {user, isAuthenticated} = useAuth0();

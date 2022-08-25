@@ -2,7 +2,7 @@
 
 #app {
   background-color: yellow;
-  max-width: 1280px;
+  /*max-width: 1280px;*/
   /*margin: 0 auto;*/
   /*padding: 1rem;*/
   font-weight: normal;
@@ -11,7 +11,7 @@
 
 #mainWrapper {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -21,7 +21,6 @@
 body {
   background-color: black;
 }
-
 
 header {
   background-color: blue;
@@ -42,6 +41,7 @@ ul {
 
 .navbar {
   padding: 1vw;
+  min-width: 100vw;
 }
 
 main {

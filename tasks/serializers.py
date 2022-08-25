@@ -13,4 +13,4 @@ class PresetSerializer(serializers.ModelSerializer):
     """Returns a JSON of preset tasks."""
     class Meta:
         model = Preset
-        fields = ['id', 'title', 'description', 'duration']
+        fields = ['id', 'category', 'title', 'description', 'duration']
