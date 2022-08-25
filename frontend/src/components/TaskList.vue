@@ -2,45 +2,43 @@
   <div class="toggleButtons">
 
     <div class="btn-group">
-      <button class="btn-primary" type="button" @click="toggleHidden">Add</button>
+      <button class="btn-primary" :class="{ active : isActive}" type="button" @click="toggleHidden">Add</button>
       <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
       <span class="visually-hidden">Toggle Dropdown</span>
       <ul class="dropdown-menu">
-        <li><button class="dropdown-item" type="button" value="Custom" @click="toggleHidden">Custom</button></li>
-        <li><button class="dropdown-item" type="button" value="Random" @click="addPresetTask">Surprise Me!</button></li>
+
+        <li><button class="dropdown-item" type="button" value="Custom" @click="addTask">Custom</button></li>
+        <li><button class="dropdown-item" type="button" value="Random" @click="addTask">Surprise Me!</button></li>
         <li class="dropdown-divider"></li>
 
         <li class="dropdown-header"><h6>By Category</h6></li>
-        <li class="dropdown-item"><label>Creative</label>
-          <ul class="sub-menu">
-            <li><button class="dropdown-item" type="button" value="Art%20Therapy" @click="addPresetTask">Art</button></li>
-            <li><button class="dropdown-item" type="button" value="Journaling" @click="addPresetTask">Journaling</button></li>
-          </ul>
-        </li>
 
-        <li class="dropdown-item"><label>Physical</label>
-          <ul class="sub-menu">
-            <li><button class="dropdown-item" type="button" value="Exercise" @click="addPresetTask">Exercise</button></li>
-            <li><button class="dropdown-item" type="button" value="Walking" @click="addPresetTask">Walking</button></li>
+        <li class="dropdown-item"><label>Creative</label>
+          <ul class="sub-menu" v-for="preset in presets[0]" :key="preset.id">
+              <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
           </ul>
         </li>
 
         <li class="dropdown-item"><label>Mental</label>
-          <ul class="sub-menu">
-            <li><button class="dropdown-item" type="button" value="Meditation" @click="addPresetTask">Meditation</button></li>
-            <li><button class="dropdown-item" type="button" value="Rest" @click="addPresetTask">Rest</button></li>
+          <ul class="sub-menu" v-for="preset in presets[1]" :key="preset.id">
+              <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
+          </ul>
+        </li>
+
+        <li class="dropdown-item"><label>Physical</label>
+          <ul class="sub-menu" v-for="preset in presets[2]" :key="preset.id">
+              <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
           </ul>
         </li>
 
         <li class="dropdown-item"><label>Social</label>
-          <ul class="sub-menu">
-            <li><button class="dropdown-item" type="button" value="Conversation" @click="addPresetTask">Conversation</button></li>
-            <li><button class="dropdown-item" type="button" value="Play" @click="addPresetTask">Play</button></li>
+          <ul class="sub-menu" v-for="preset in presets[3]" :key="preset.id">
+              <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
           </ul>
         </li>
 
-
       </ul>
+
       <button class="toggleButtons current" v-bind:class="{ active: activeButton === 'toggleButtons current' }" @click="toggleCurrentTasks">Current</button>
       <button class="toggleButtons complete" v-bind:class="{ active: activeButton === 'toggleButtons complete' }" @click="toggleCompleteTasks">Complete</button>
       <input class="toggleButtons showAll" type="checkbox" @click="toggleShowAllTasks" ref="showAll">Show All
@@ -48,7 +46,7 @@
 
   </div>
 
-    <section v-show="!isHidden" class="content addForm">
+    <section v-show="!isHidden" class="content addForm" ref="addForm">
       <form ref="addTaskForm" v-on:submit.prevent="postTask">
         <input v-model="user.sub" type="hidden" ref="auth0IDInput" name="auth0ID">
         <br><label for="activity">Activity</label><br>
@@ -65,7 +63,6 @@
 
       </form>
     </section>
-
 
   <div>
       <ul class="taskList">
@@ -97,7 +94,6 @@
       </ul>
     </div>
 
-
 </template>
 
 <script>
@@ -112,6 +108,7 @@ export default {
 
   setup() {
     const {user, getAccessTokenSilently} = useAuth0();
+    const presets = reactive([])
     const tasks = reactive([])
     const task = {
       'id': '',
@@ -125,7 +122,6 @@ export default {
     }
 
     const currentTasks = computed( () => { tasks.filter( task => task.completed === false ) } )
-
     const activeButton = ref("toggleButtons current")
 
     let isHidden = ref(true)
@@ -134,6 +130,23 @@ export default {
     let completeIsActive = ref(false)
     let showAllTasks = ref(false)
     let canEdit = ref(false)
+
+    getPresets()
+    getCurrentTasks()
+
+    async function getPresets() {
+      const creative = await axios.get(`${API_URL}/api/preset/?category=creative`)
+      presets.push(creative.data)
+
+      const mental = await axios.get(`${API_URL}/api/preset/?category=mental`)
+      presets.push(mental.data)
+
+      const physical = await axios.get(`${API_URL}/api/preset/?category=physical`)
+      presets.push(physical.data)
+
+      const social = await axios.get(`${API_URL}/api/preset/?category=social`)
+      presets.push(social.data)
+      }
 
     async function getAllTasks() {
       const token = await getAccessTokenSilently();
@@ -144,8 +157,6 @@ export default {
       });
       tasks[0] = data.data
     }
-
-    getCurrentTasks()
 
     async function postTask() {
       try {
@@ -218,14 +229,6 @@ export default {
             Authorization: `Bearer ${token}`
           }
         }); await setTaskList()
-        // if (!showAllTasks.value){
-        //   if (task.completed) {
-        //     await getCurrentTasks()
-        //   }
-        //   else {
-        //     await getCompleteTasks()
-        //   }
-        // }
       } catch(error){
         console.log(error)
       }
@@ -260,10 +263,10 @@ export default {
       }
 
       return {
-        user, tasks, task, isHidden, canEdit, currentTasks, showAllTasks, isActive, currentIsActive, completeIsActive, activeButton,
+        user, tasks, task, isHidden, canEdit, currentTasks, showAllTasks, isActive, currentIsActive, completeIsActive,
+        activeButton, presets,
         getAllTasks, postTask, editTask, deleteTask, markTaskComplete, getCurrentTasks, getCompleteTasks
     }
-
   },
   methods: {
       deactivateButtons() {
@@ -307,18 +310,19 @@ export default {
         }
         this.showAllTasks = !this.showAllTasks
       },
-      async addPresetTask(event) {
+      async addTask(event) {
         if (this.isHidden) {
           this.isHidden = !this.isHidden
         }
-
-        if (event.target.value === 'Random') {
+        if (event.target.value === 'Custom') {
+          this.clearFormInputField()
+        }
+        else if (event.target.value === 'Random') {
           const response = await axios.get(`${API_URL}/api/preset/`)
           const presets = response.data
           const randomIndex = Math.floor(Math.random() * presets.length)
 
           const data = presets[randomIndex]
-
           this.setFormInputField(data)
         }
         else {
@@ -327,7 +331,24 @@ export default {
         this.setFormInputField(data)
         }
       },
+      clearFormInputField() {
+        this.isActive = true
+
+        this.task.title = ''
+        this.task.description = ''
+        this.task.duration = ''
+
+        this.$refs.activityInput.value = ''
+        this.$refs.descriptionInput.value = ''
+        this.$refs.durationInput.value = ''
+
+        this.$refs.activityInput.placeholder = 'Custom'
+        this.$refs.descriptionInput.placeholder = 'Custom'
+        this.$refs.durationInput.placeholder = '10'
+      },
       setFormInputField(data) {
+        this.isActive = true
+
         this.$refs.activityInput.value = data.title
         this.$refs.descriptionInput.value = data.description
         this.$refs.durationInput.value = data.duration
@@ -336,9 +357,8 @@ export default {
         this.task.description = data.description
         this.task.duration = data.duration
       },
-      },
+    },
 }
-
 </script>
 
 <style scoped>

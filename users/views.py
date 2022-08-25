@@ -17,7 +17,7 @@ require_auth.register_token_validator(validator)
 
 @csrf_exempt
 def management(request):
-
+    # Request access token to Management API (24 hours)
     management_url = 'https://django-rest-api.us.auth0.com/api/v2'
 
     request_token_url = 'https://django-rest-api.us.auth0.com/oauth/token'
@@ -44,8 +44,8 @@ def management(request):
 
     elif request.method == 'PATCH':
         user_data = JSONParser().parse(request)
-
-        response = r.patch(url=f'{management_url}/users/auth0|62ed6112c0c6c7196cf4df7c', headers=headers, data=user_data)
+        user_id = user_data["user_metadata[user_id]"]
+        response = r.patch(url=f'{management_url}/users/{user_id}', headers=headers, data=user_data)
         data = response.json()
         return JsonResponse(data, status=201, safe=False)
 

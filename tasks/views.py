@@ -1,10 +1,9 @@
-import django_filters.rest_framework
-from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse, JsonResponse
+import rest_framework.permissions
 from rest_framework.parsers import JSONParser
 from rest_framework.generics import ListAPIView
-import rest_framework.permissions
 from authlib.integrations.django_oauth2 import ResourceProtector
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse, JsonResponse
 from backend import validator
 from .models import Task, Preset
 from .serializers import TaskSerializer, PresetSerializer
@@ -37,8 +36,6 @@ def tasks(request):
         return JsonResponse(serializer.errors, status=400,)
 
 
-
-
 # @require_auth(None)
 @csrf_exempt
 def task_detail(request, pk):
@@ -64,14 +61,15 @@ def task_detail(request, pk):
 
 
 class TaskListView(ListAPIView):
-    queryset = Task.objects.all()
+    queryset = Task.objects.all().order_by('owner', 'title',)
     serializer_class = TaskSerializer
     permission_classes = [rest_framework.permissions.IsAuthenticatedOrReadOnly]
-    filterset_fields = ['owner', 'duration', 'completed', 'date_completed']
+    filterset_fields = ['owner', 'title', 'duration', 'completed', 'date_completed']
 
 
 class PresetView(ListAPIView):
-    queryset = Preset.objects.all()
+    queryset = Preset.objects.all().order_by('category', 'title')
     serializer_class = PresetSerializer
     permission_classes = [rest_framework.permissions.IsAuthenticatedOrReadOnly]
-    filterset_fields = ['title', 'description', 'duration']
+    filterset_fields = ['id', 'category', 'title', 'description', 'duration']
+

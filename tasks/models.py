@@ -17,6 +17,7 @@ class Task(models.Model):
 
 class Preset(models.Model):
     """Model to describe generic preset tasks that users may choose from and call from API."""
+    category = models.CharField(default='Miscellaneous', max_length=50)
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=100)
     duration = models.IntegerField()
