@@ -1,13 +1,11 @@
 <script setup>
 import PageHeader from './components/PageHeader.vue'
-import PageFooter from './components/PageFooter.vue'
-import TaskList from './components/TaskList.vue';
 import Navbar from './components/Navbar.vue';
+import PageFooter from './components/PageFooter.vue'
 </script>
 
 <template>
-  <div id="mainWrapper" class="wrapper">
-    <header>
+    <header class="p-2 bg-gradient">
       <PageHeader />
     </header>
 
@@ -24,10 +22,9 @@ import Navbar from './components/Navbar.vue';
       </Suspense>
     </main>
 
-    <footer>
+    <footer class="p-2 bg-gradient">
       <PageFooter />
     </footer>
-  </div>
 </template>
 
 <style scoped>

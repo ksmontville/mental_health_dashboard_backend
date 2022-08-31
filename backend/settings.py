@@ -22,6 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 load_dotenv(find_dotenv())
+SECRET_KEY = os.environ['SECRET_KEY']
+
 APP_DOMAIN = os.environ['APP_DOMAIN']
 APP_CLIENT_ID = os.environ['APP_CLIENT_ID']
 APP_CLIENT_SECRET = os.environ['APP_CLIENT_SECRET']
@@ -30,15 +32,13 @@ APP_URL = os.environ['APP_URL']
 MANAGEMENT_URL = os.environ['MANAGEMENT_URL']
 MANAGEMENT_CLIENT_ID = os.environ['MANAGEMENT_CLIENT_ID']
 MANAGEMENT_CLIENT_SECRET = os.environ['MANAGEMENT_CLIENT_SECRET']
-
 PAYLOAD = os.environ['PAYLOAD']
 TOKEN_REQUEST_URL = os.environ['REQUEST_TOKEN_URL']
 
-SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -74,7 +74,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_filters',
     'rest_framework',
-    'rest_framework_jwt',
+    'rest_framework_simplejwt',
     'corsheaders',
     'users',
     'tasks',

@@ -1,5 +1,7 @@
 <template>
-  <h1 class="page-header">Cool Mental Health Image</h1>
+  <h1>MightyMind</h1>
+  <small>Change what you can, manage what you can't. <br>
+  <small style="color: lightcyan;">-- Raymond McCauley</small></small>
 </template>
 
 <script>

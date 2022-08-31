@@ -1,21 +1,21 @@
 <template>
-
-  <section v-if="isAuthenticated">
-    <h2>Hello, {{ displayName }}!</h2>
-    <h3>Last Login: {{ user.updated_at.slice(0, 10) }}</h3>
-    <router-link to="/profile">View/Edit Profile</router-link>
-
-  </section>
-    <section id="tasks">
-      <TaskList />
+  <div class="dashboard bg-wrapper bg-gradient">
+    <section class="dashboard text-container" v-if="isAuthenticated">
+      <h3 class="display-3">Hello, {{ displayName }}!</h3>
+      <h4>Last Login: {{ user.updated_at.slice(0, 10) }}</h4>
+      <router-link to="/profile">View Profile</router-link>
     </section>
 
+      <section id="tasks">
+        <TaskList />
+      </section>
+  </div>
 </template>
 
 <script>
 import {useAuth0} from "@auth0/auth0-vue";
 import axios from "axios";
-import {reactive, ref} from "vue";
+import {ref} from "vue";
 
 
 const MANAGEMENT_API = "http://localhost:8000/api/users/management"
@@ -43,7 +43,6 @@ export default {
     return {user, isAuthenticated, displayName}
   },
 }
-
 
 </script>
 

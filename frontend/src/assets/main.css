@@ -1,21 +1,17 @@
 @import "./base.css";
 
+/* General Styling */
 #app {
-  background-color: yellow;
-  /*max-width: 1280px;*/
-  /*margin: 0 auto;*/
-  /*padding: 1rem;*/
+  max-width: 1280px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  color: white;
   font-weight: normal;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-#mainWrapper {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: green;
 }
 
 body {
@@ -23,54 +19,202 @@ body {
 }
 
 header {
-  background-color: blue;
+  background-color: darkslateblue;
+  text-align: center;
+  min-width: 100vw;
+}
+main {
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: 4vw;
+  justify-content: space-between;
   min-width: 100vw;
 }
 
+footer {
+  background-color: darkslateblue;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  min-width: 100vw;
+  color: lavenderblush;
+}
+
+footer label {
+  color: darkslateblue;
+
+}
+footer a {
+  color: lavenderblush;
+}
+
+.footer__content__top {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+footer .footer-contact {
+  flex: 2;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+footer .footer-contact button {
+  align-self: center;
+  margin: 2.4vw 0;
+}
+
+footer .text-container {
+  flex: 1;
+  padding: 2.4vw;
+}
+
+.footer__span{
+  padding: 3.6vw;
+}
+
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+.active {
+  border: solid 2px yellow;
+}
+
+
+/* Navbar Styling */
 ul {
   list-style: none;
   margin: 1.2vw;
   padding: 1.2vw;
 }
 
-.page-header {
-  color: orange;
-  text-align: center;
-  padding: 4.8vw;
+li {
+  font-size: 4.8vw;
+  margin: 3.6vw;
 }
 
 .navbar {
+  background-color: lavender !important;
   padding: 1vw;
   min-width: 100vw;
 }
 
-main {
+.navbar-brand {
+
+}
+.nav-link {
+}
+
+
+/* LandingPage Styling */
+.content.bg-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: url('img/rainbow_door.jpg');
+  background-size: cover;
+  opacity: 0.75;
+
+}
+
+.content--get-started {
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-  font-size: 4vw;
-  background-color: pink;
-  min-height: 100vh;
-  min-width: 100vw;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+
 }
 
-.content {
+.content--get-started  button {
+  min-width: 64vw;
+  background-color: darkslateblue !important;
+  border-color: lavender !important;
+  color: lavender !important;
 }
 
-.get-started {
-  background-color: orange;
+.content--get-started figure {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
 }
 
-.dashboard {
-  background-color: white;
+.content--get-started .img-fluid {
+  max-width: 70%;
+  height: auto;
 }
 
-.features {
-  background-color: purple;
+.content--features {
+  display: flex;
+  flex-flow: column wrap;
 }
 
-.about {
-  background-color: teal;
+.content--features .img-container {
+  flex: 1;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4vw 12vw;
+}
+
+.content--features .img-fluid {
+  max-width: 30%;
+  height: auto;
+}
+
+.content--about {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.content--about figure {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.content--about .img-fluid {
+  max-width: 75%;
+  height: auto;
+}
+
+
+
+/* UserDashboard Styling */
+.dashboard.bg-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: url('img/dashbackground1.jpg');
+  background-size: cover;
+  background-color: black;
+}
+
+.dashboard.text-container a {
+  color: lavenderblush;
+}
+
+/* UserProfile styling*/
+
+
+/* TaskList Styling*/
+.btn.btn-primary {
+
 }
 
 .taskList__input {
@@ -78,73 +222,20 @@ main {
   border-bottom: 2px solid lightpink;
 }
 
-footer {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: stretch;
-  margin-top: auto;
-  min-width: 100vw;
-  background-color: red;
-}
 
-.footer__span{
-  padding: 1.8vw;
-}
 
-.footer__form {
-  display: flex;
-  flex-flow: column nowrap;
-}
-
-.footer__form--input {
-  width: 64vw;
-  float: right;
-}
-
-.footer__form label {
-  margin-right: 2.4vw;
-}
-
-.footer__form span {
-  text-align: center;
-}
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-}
-
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-
-.active {
-  border: solid 2px yellow;
-}
-
+/* Media Settings */
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
   }
 }
 
-/*@media (min-width: 1024px) {*/
-/*!*  body {*!*/
-/*!*    background-color: white;*!*/
-/*!*  }*!*/
+@media (min-width: 1024px) {
+  body {
+  }
 
-/*!*  #mainWrapper {*!*/
-/*!*  }*!*/
-
-/*!*  #app {*!*/
-/*!*    *!*/
-/*!*  }*!*/
-/*!*}*!*/
+  #app {
+    max-width: 10%;
+  }
+}

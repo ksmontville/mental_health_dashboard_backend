@@ -1,12 +1,12 @@
 <template>
   <div class="toggleButtons">
 
-    <div class="btn-group">
-      <button class="btn-primary" :class="{ active : isActive}" type="button" @click="toggleHidden">Add</button>
+    <div class="btn-group btn-group-sm" role="group" aria-label="Task List Buttons">
+      <button class="btn btn-dark" :class="{ active : isActive}" type="button" @click="toggleHidden">Add</button>
       <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
       <span class="visually-hidden">Toggle Dropdown</span>
-      <ul class="dropdown-menu">
 
+      <ul class="dropdown-menu">
         <li><button class="dropdown-item" type="button" value="Custom" @click="addTask">Custom</button></li>
         <li><button class="dropdown-item" type="button" value="Random" @click="addTask">Surprise Me!</button></li>
         <li class="dropdown-divider"></li>
@@ -39,55 +39,68 @@
 
       </ul>
 
-      <button class="toggleButtons current" v-bind:class="{ active: activeButton === 'toggleButtons current' }" @click="toggleCurrentTasks">Current</button>
-      <button class="toggleButtons complete" v-bind:class="{ active: activeButton === 'toggleButtons complete' }" @click="toggleCompleteTasks">Complete</button>
-      <input class="toggleButtons showAll" type="checkbox" @click="toggleShowAllTasks" ref="showAll">Show All
+      <button class="btn btn-outline-light toggleButtons current" v-bind:class="{ active: activeButton === 'toggleButtons current' }" @click="toggleCurrentTasks">Current</button>
+      <button class="btn btn-outline-light toggleButtons complete" v-bind:class="{ active: activeButton === 'toggleButtons complete' }" @click="toggleCompleteTasks">Complete</button>
+      <input type="checkbox" class="btn-check toggleButtons showAll" id="showAllToggle" @click="toggleShowAllTasks" ref="showAll">
+      <label class="btn btn-outline-light" for="showAllToggle">Show All</label>
     </div>
 
   </div>
 
     <section v-show="!isHidden" class="content addForm" ref="addForm">
       <form ref="addTaskForm" v-on:submit.prevent="postTask">
-        <input v-model="user.sub" type="hidden" ref="auth0IDInput" name="auth0ID">
-        <br><label for="activity">Activity</label><br>
-        <input v-model="task.title" type="text" ref="activityInput" name="title"><br>
+        <ul>
+          <li>
+            <input class="form-control" v-model="user.sub" type="hidden" ref="auth0IDInput" name="auth0ID">
+          </li>
 
-        <label for="description">Description</label><br>
-        <textarea v-model="task.description" type="text" ref="descriptionInput" name="description"></textarea><br>
+         <li>
+           <label class="form-label" for="title">Activity</label><br>
+           <input class="form-control form-control-sm" v-model="task.title" type="text" ref="activityInput" id="title" name="title">
+         </li>
 
-        <label for="duration">Duration (minutes)</label><br>
-        <input v-model="task.duration" type="number" ref="durationInput" name="duration"><br><br>
+          <li>
+            <label class="form-label" for="description">Description</label>
+            <textarea class="form-control form-control-sm" v-model="task.description" type="text" ref="descriptionInput" id="description" name="description"></textarea>
+          </li>
 
-        <input type="submit" value="submit">
-        <br>
+          <li>
+            <label class="form-label" for="duration">Duration (minutes)</label>
+            <input class="form-control form-control-sm" v-model="task.duration" type="number" ref="durationInput" id="duration" name="duration">
+          </li>
 
+          <li>
+            <input class="btn btn-dark" type="submit" value="submit">
+          </li>
+        </ul>
       </form>
     </section>
 
-  <div>
+  <div class="tasks taskList">
       <ul class="taskList">
         <li v-for="task in tasks[0]" :key="task.id">
           <div v-if="user.sub === task.owner">
             <div class="taskList__child">
 
-              <br><label for="activity">Activity</label><br>
-              <input class="taskList__input" v-model="task.title" type="text" id="activity" name="activity" v-bind:readonly="!task.canEdit"><br>
+              <label class="form-label col-form-label-sm" for="activity">Activity</label>
+              <input class="form-control form-control-sm taskList__input" v-model="task.title" type="text" id="activity" name="activity" v-bind:readonly="!task.canEdit">
 
-              <label for="description">Description</label><br>
-              <textarea class="taskList__input" v-model="task.description" type="text" id="description" name="description" v-bind:readonly="!task.canEdit"></textarea><br>
+              <label class="form-label col-form-label-sm" for="description">Description</label>
+              <textarea class="form-control form-control-sm taskList__input" v-model="task.description" type="text" id="description" name="description" v-bind:readonly="!task.canEdit"></textarea>
 
-              <label for="duration">Duration (minutes)</label><br>
-              <input class="taskList__input" v-model="task.duration" type="text" id="duration" name="duration" v-bind:readonly="!task.canEdit"><br>
+              <label class="form-label col-form-label-sm" for="duration">Duration (minutes)</label>
+              <input class="form-control form-control-sm taskList__input" v-model="task.duration" type="text" id="duration" name="duration" v-bind:readonly="!task.canEdit">
 
-              <h6>Created: {{ task.created.slice(0, 10) }}</h6>
-              <span>Complete: <input type="checkbox" @click="markTaskComplete(task)" v-model="task.completed" id="isComplete" name="isComplete">
-                <label v-if="task.completed">{{ task.date_completed }}</label>
-              </span><br>
 
-              <button v-if="!task.canEdit" @click="task.canEdit = !task.canEdit" id="editButton">Edit</button>
-              <button v-else @click="editTask(task).then(toggleCanEdit)" id="submitButton">Submit</button>
-              <button @click="deleteTask(task)">Remove</button><br>
-
+              <div class="btn-group btn-group-sm" role="group">
+                <button class="btn btn-light" v-if="!task.canEdit" @click="task.canEdit = !task.canEdit" id="editButton">Edit</button>
+                <button class="btn btn-light" v-else @click="editTask(task).then(toggleCanEdit)" id="submitButton">Submit</button>
+                <button class="btn btn-secondary" @click="deleteTask(task)">Remove</button><br>
+                <input class="btn-check" type="checkbox" id="isComplete" v-model="task.completed" @click="markTaskComplete(task)">
+                <label class="btn btn-outline-dark" for="isComplete">Done!</label>
+              </div>
+              <label v-if="task.completed"><small><em>@ {{ task.date_completed }}</em></small></label>
+<!--              <label v-else><small><em>@ {{ task.created.toLocaleString() }}</em></small></label>-->
             </div>
           </div>
         </li>
@@ -133,6 +146,7 @@ export default {
 
     getPresets()
     getCurrentTasks()
+
 
     async function getPresets() {
       const creative = await axios.get(`${API_URL}/api/preset/?category=creative`)

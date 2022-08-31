@@ -1,35 +1,37 @@
 <template>
-  <section>
-    <h1>User Profile -- <span><button class="btn  btn-sm btn-secondary" :class="{active: canEdit}" @click="toggleCanEdit">Edit</button></span></h1>
-    <h2>Hello, {{ displayName }}!</h2>
-
-    <label>Avatar</label><img v-bind:src="avatar" alt="The users current profile picture.">
+  <div class="dashboard bg-wrapper bg-gradient">
     <section>
-    <span><label>Details</label></span><br>
-      <span><label>Email</label><input v-bind:disabled="canEdit" readonly v-model="user.email"></span>
+      <h1>User Profile -- <span><button class="btn  btn-sm btn-secondary" :class="{active: canEdit}" @click="toggleCanEdit">Edit</button></span></h1>
+      <h2>Hello, {{ displayName }}!</h2>
+
+      <label>Avatar</label><img v-bind:src="avatar" alt="The users current profile picture.">
+      <section>
+      <span><label>Details</label></span><br>
+        <span><label>Email</label><input v-bind:disabled="canEdit" readonly v-model="user.email"></span>
+      </section>
+
+      <div>
+        <form v-on:submit.prevent="editMetaData">
+          <label>Preferred Name</label>
+          <input v-model="preferredName" type="text" name="preferredName" placeholder="New Name" v-bind:readonly="!canEdit">
+          <label>Display Name</label>
+          <input v-model="displayName" type="text" name="displayName" placeholder="New Name" v-bind:readonly="!canEdit">
+
+          <section>
+          <span><label>Social Networks</label></span>
+          <ul>
+            <li v-for="network in socialNetworks" :key="network.net">
+              <label>{{ network.net }}</label>
+              <input v-model="network.acct" type="text" v-bind:readonly="!canEdit">
+            </li>
+          </ul>
+          </section>
+
+          <button class="btn btn-secondary" type="submit" value="submit" v-bind:disabled="!canEdit">Submit</button>
+        </form>
+      </div>
     </section>
-
-    <div>
-      <form v-on:submit.prevent="editMetaData">
-        <label>Preferred Name</label>
-        <input v-model="preferredName" type="text" name="preferredName" placeholder="New Name" v-bind:readonly="!canEdit">
-        <label>Display Name</label>
-        <input v-model="displayName" type="text" name="displayName" placeholder="New Name" v-bind:readonly="!canEdit">
-
-        <section>
-        <span><label>Social Networks</label></span>
-        <ul>
-          <li v-for="network in socialNetworks" :key="network.net">
-            <label>{{ network.net }}</label>
-            <input v-model="network.acct" type="text" v-bind:readonly="!canEdit">
-          </li>
-        </ul>
-        </section>
-
-        <button class="btn btn-secondary" type="submit" value="submit" v-bind:disabled="!canEdit">Submit</button>
-      </form>
-    </div>
-  </section>
+  </div>
 </template>
 
 <script>
