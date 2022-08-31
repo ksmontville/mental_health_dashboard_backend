@@ -38,7 +38,7 @@ TOKEN_REQUEST_URL = os.environ['REQUEST_TOKEN_URL']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', 'https://dli-backend.herokuapp.com/']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'https://dli-backend.herokuapp.com/']
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -178,6 +178,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
