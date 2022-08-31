@@ -36,9 +36,9 @@ PAYLOAD = os.environ['PAYLOAD']
 TOKEN_REQUEST_URL = os.environ['REQUEST_TOKEN_URL']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'https://dli-backend.herokuapp.com/']
+ALLOWED_HOSTS = [*]
 
 CORS_ALLOW_ALL_ORIGINS = True
 
