@@ -39,7 +39,7 @@ import {useAuth0} from "@auth0/auth0-vue";
 import axios from 'axios'
 import {reactive, ref} from "vue";
 
-const MANAGEMENT_API = "http://localhost:8000/api/users/management"
+const MANAGEMENT_API = "https://dli-backend.herokuapp.com/api/users/management"
 
 export default {
   name: "UserProfile",

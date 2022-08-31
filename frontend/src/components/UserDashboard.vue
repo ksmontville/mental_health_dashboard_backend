@@ -18,7 +18,7 @@ import axios from "axios";
 import {ref} from "vue";
 
 
-const MANAGEMENT_API = "http://localhost:8000/api/users/management"
+const MANAGEMENT_API = "https://dli-backend.herokuapp.com/api/users/management"
 
 export default {
   name: "UserDashboard",

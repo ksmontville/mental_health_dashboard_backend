@@ -114,7 +114,7 @@ import {useAuth0} from "@auth0/auth0-vue";
 import axios from 'axios'
 import {ref, reactive, computed} from "vue";
 
-const API_URL = 'http://localhost:8000'
+const API_URL = 'https://dli-backend.herokuapp.com'
 
 export default {
   name: "TaskList",
