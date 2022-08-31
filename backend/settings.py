@@ -38,7 +38,7 @@ TOKEN_REQUEST_URL = os.environ['REQUEST_TOKEN_URL']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', 'https://dli-backend.herokuapp.com/']
 
 CORS_ALLOW_ALL_ORIGINS = True
 
