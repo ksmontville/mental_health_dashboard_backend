@@ -1,8 +1,8 @@
 <template>
   <div class="toggleButtons">
 
-    <div class="btn-group btn-group-sm" role="group" aria-label="Task List Buttons">
-      <button class="btn btn-dark" :class="{ active : isActive}" type="button" @click="toggleHidden">Add</button>
+    <div class="btn-group btn-group-sm btn-group__activities" role="group" aria-label="Task List Buttons">
+      <button class="btn btn-dark" :class="{ active : isActive}" type="button" @click="toggleHidden">Add New</button>
       <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
       <span class="visually-hidden">Toggle Dropdown</span>
 
@@ -39,8 +39,8 @@
 
       </ul>
 
-      <button class="btn btn-outline-light toggleButtons current" v-bind:class="{ active: activeButton === 'toggleButtons current' }" @click="toggleCurrentTasks">Current</button>
-      <button class="btn btn-outline-light toggleButtons complete" v-bind:class="{ active: activeButton === 'toggleButtons complete' }" @click="toggleCompleteTasks">Complete</button>
+      <button class="btn btn-outline-light toggleButtons current" v-bind:class="{ active: activeButton === 'toggleButtons current' }" @click="toggleCurrentTasks">Show Current</button>
+      <button class="btn btn-outline-light toggleButtons complete" v-bind:class="{ active: activeButton === 'toggleButtons complete' }" @click="toggleCompleteTasks">Show Complete</button>
       <input type="checkbox" class="btn-check toggleButtons showAll" id="showAllToggle" @click="toggleShowAllTasks" ref="showAll">
       <label class="btn btn-outline-light" for="showAllToggle">Show All</label>
     </div>
@@ -80,7 +80,7 @@
       <ul class="taskList">
         <li v-for="task in tasks[0]" :key="task.id">
           <div v-if="user.sub === task.owner">
-            <div class="taskList__child">
+            <div class="list-group taskList__child">
 
               <label class="form-label col-form-label-sm" for="activity">Activity</label>
               <input class="form-control form-control-sm taskList__input" v-model="task.title" type="text" id="activity" name="activity" v-bind:readonly="!task.canEdit">
@@ -100,7 +100,6 @@
                 <label class="btn btn-outline-dark" for="isComplete">Done!</label>
               </div>
               <label v-if="task.completed"><small><em>@ {{ task.date_completed }}</em></small></label>
-<!--              <label v-else><small><em>@ {{ task.created.toLocaleString() }}</em></small></label>-->
             </div>
           </div>
         </li>

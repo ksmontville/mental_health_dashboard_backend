@@ -3,8 +3,9 @@
     <section class="dashboard text-container" v-if="isAuthenticated">
       <h3 class="display-3">Hello, {{ displayName }}!</h3>
       <h4>Last Login: {{ user.updated_at.slice(0, 10) }}</h4>
-      <router-link to="/profile">View Profile</router-link>
     </section>
+
+      <router-link to="/profile">View Profile</router-link>
 
       <section id="tasks">
         <TaskList />

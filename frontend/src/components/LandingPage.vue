@@ -9,7 +9,7 @@
       </div>
       <div class="content img-container p-3 mb-3">
         <figure>
-          <img src="src/assets/img/brain.jpg" class="img-fluid img-thumbnail rounded" alt="The Best Gift is You!">
+          <img src="../assets/img/brain.jpg" class="img-fluid img-thumbnail rounded" alt="The Best Gift is You!">
           <figcaption><em>Your brain will thank you</em></figcaption>
         </figure>
       </div>
@@ -37,10 +37,10 @@
       </div>
 
       <div class="content img-container p-3 mb-3">
-          <img src="src/assets/img/meditate.jpg" class="img-fluid img-thumbnail rounded" alt="Meditate!">
-          <img src="src/assets/img/naturebreak.jpg" class="img-fluid img-thumbnail rounded" alt="Nature Break!">
-          <img src="src/assets/img/enjoy.jpg" class="img-fluid img-thumbnail rounded" alt="Do Something You Enjoy!">
-          <img src="src/assets/img/talktofriend.jpg" class="img-fluid img-thumbnail rounded" alt="Talk to a Friend!">
+          <img src="../assets/img/meditate.jpg" class="img-fluid img-thumbnail rounded" alt="Meditate!">
+          <img src="../assets/img/naturebreak.jpg" class="img-fluid img-thumbnail rounded" alt="Nature Break!">
+          <img src="../assets/img/enjoy.jpg" class="img-fluid img-thumbnail rounded" alt="Do Something You Enjoy!">
+          <img src="../assets/img/talktofriend.jpg" class="img-fluid img-thumbnail rounded" alt="Talk to a Friend!">
       </div>
     </section>
 
@@ -56,7 +56,7 @@
       <div class="content img-container p-3 mb-3">
 
         <figure class="figure">
-          <img src="src/assets/img/drliza.jpeg" class="img-fluid img-thumbnail rounded" alt="Dr. Liza Ignatova">
+          <img src="../assets/img/drliza.jpeg" class="img-fluid img-thumbnail rounded" alt="Dr. Liza Ignatova">
           <figcaption><em>Dr. Liza Ignatova</em></figcaption>
         </figure>
       </div>

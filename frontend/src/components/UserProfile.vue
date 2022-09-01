@@ -93,7 +93,6 @@ export default {
         }
       });
       toggleCanEdit()
-      console.log(response.data.user_metadata)
     }
 
     return {user, isAuthenticated, avatar, displayName, preferredName, socialNetworks, canEdit, editMetaData,toggleCanEdit}

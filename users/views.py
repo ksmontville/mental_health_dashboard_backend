@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from authlib.integrations.django_oauth2 import ResourceProtector
 from backend import validator
-from backend.settings import APP_DOMAIN, APP_URL, MANAGEMENT_URL, TOKEN_REQUEST_URL, PAYLOAD
+from backend.settings import APP_DOMAIN, APP_URL, MANAGEMENT_URL, REQUEST_TOKEN_URL, PAYLOAD
 
 require_auth = ResourceProtector()
 validator = validator.Auth0JWTBearerTokenValidator(
@@ -20,9 +20,8 @@ def management(request):
     headers = {'content-type': 'application/json'}
     payload = PAYLOAD
 
-    response = r.post(url=TOKEN_REQUEST_URL, headers=headers, data=payload)
+    response = r.post(url=REQUEST_TOKEN_URL, headers=headers, data=payload)
 
-    data = response.json()
     token = response.json()['access_token']
 
     headers = {
@@ -30,6 +29,7 @@ def management(request):
         'contentType': 'application/json'
     }
 
+    # Use access token to GET or POST to the Auth0 Management API
     if request.method == 'GET':
         response = r.get(url=f'{MANAGEMENT_URL}/users', headers=headers)
         data = response.json()
