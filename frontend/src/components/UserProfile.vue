@@ -1,8 +1,11 @@
 <template>
   <div class="dashboard bg-wrapper bg-gradient">
+  <nav>
+    <DashboardNavbar />
+  </nav>
     <section>
-      <h1>User Profile -- <span><button class="btn  btn-sm btn-secondary" :class="{active: canEdit}" @click="toggleCanEdit">Edit</button></span></h1>
-      <h2>Hello, {{ displayName }}!</h2>
+      <h1>My Profile -- <span><button class="btn  btn-sm btn-secondary" :class="{active: canEdit}" @click="toggleCanEdit">Edit</button></span></h1>
+
 
       <label>Avatar</label><img v-bind:src="avatar" alt="The users current profile picture.">
       <section>
