@@ -1,15 +1,17 @@
 <template>
   <div class="dashboard bg-wrapper bg-gradient">
+    <nav>
+      <DashboardNavbar />
+    </nav>
     <section class="dashboard text-container" v-if="isAuthenticated">
       <h3 class="display-3">Hello, {{ displayName }}!</h3>
-      <h4>Last Login: {{ user.updated_at.slice(0, 10) }}</h4>
+      <h4><em>Last Login: {{ user.updated_at.slice(0, 10) }}</em></h4>
     </section>
 
-      <router-link to="/profile">View Profile</router-link>
+    <section>
+      Some kind of summary of recent activity here
+    </section>
 
-      <section id="tasks">
-        <TaskList />
-      </section>
   </div>
 </template>
 

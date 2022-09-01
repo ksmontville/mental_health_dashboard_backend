@@ -9,6 +9,7 @@ import UserDashboard from './components/UserDashboard.vue'
 import TaskList from './components/TaskList.vue'
 import UserProfile from './components/UserProfile.vue'
 import PageFooter from './components/PageFooter.vue'
+import DashboardNavbar from './components/DashboardNavbar.vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import './assets/main.css'
@@ -28,8 +29,9 @@ app
     .component('Navbar', Navbar)
     .component('LandingPage', LandingPage)
     .component('UserDashboard', UserDashboard)
+    .component('DashboardNavbar', DashboardNavbar)
     .component('TaskList', TaskList)
     .component('UserProfile', UserProfile)
-    .component('PageFooter', PageFooter)
+    .component('DashboardNavbar', DashboardNavbar)
     .mount('#app')
 
