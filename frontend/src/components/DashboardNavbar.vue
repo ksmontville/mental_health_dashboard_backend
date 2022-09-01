@@ -13,11 +13,13 @@
       </div>
       <div class="offcanvas-body">
       <div class="btn-group-vertical btn-group-lg">
-        <button class="btn btn-sm btn-info bg-gradient mb-3 mt-3"><router-link to="/dashboard">My Dashboard</router-link></button>
-        <button class="btn btn-sm btn-info bg-gradient mb-3 mt-3"><router-link to="/tasklist">My Activities</router-link></button>
-        <button class="btn btn-sm btn-info bg-gradient mb-3 mt-3"><router-link to="">My Journal</router-link></button>
-        <button class="btn btn-sm btn-info bg-gradient mb-3 mt-3"><router-link to="">My Statistics</router-link></button>
-        <button class="btn btn-sm btn-info bg-gradient mb-3 mt-3"><router-link to="/profile">My Profile</router-link></button>
+        <button class="btn btn-sm btn-info bg-gradient p-2 mb-2"><router-link to="/dashboard">Dashboard</router-link></button>
+        <button class="btn btn-sm btn-info bg-gradient p-2 mb-2"><router-link to="/tasklist">Activities</router-link></button>
+        <button class="btn btn-sm btn-info bg-gradient p-2 mb-2"><router-link to="">Gratitude Board</router-link></button>
+        <button class="btn btn-sm btn-info bg-gradient p-2 mb-2"><router-link to="">Sleep Tracker</router-link></button>
+        <button class="btn btn-sm btn-info bg-gradient p-2 mb-2"><router-link to="">Journal</router-link></button>
+        <button class="btn btn-sm btn-info bg-gradient p-2 mb-2"><router-link to="">Statistics</router-link></button>
+        <button class="btn btn-sm btn-info bg-gradient p-2 mb-2"><router-link to="/profile">Profile</router-link></button>
       </div>
       </div>
     </div>

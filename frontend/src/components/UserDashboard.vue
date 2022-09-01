@@ -8,7 +8,7 @@
       <h4><em>Last Login: {{ user.updated_at.slice(0, 10) }}</em></h4>
     </section>
 
-    <section>
+    <section style="min-height: 100vh;">
       Some kind of summary of recent activity here
     </section>
 

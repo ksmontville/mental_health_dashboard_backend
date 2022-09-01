@@ -5,44 +5,43 @@
     </nav>
 
     <div class="toggleButtons">
-
       <div class="btn-group btn-group-sm btn-group__activities" role="group" aria-label="Task List Buttons">
-        <button class="btn btn-dark" :class="{ active : isActive}" type="button" @click="toggleHidden">Add New</button>
-        <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
-        <span class="visually-hidden">Toggle Dropdown</span>
+        
+          <button class="btn btn-dark dropdown-toggle" @click="toggleHidden" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            New Activity
+          </button>
+          <ul class="dropdown-menu">
+            <li><button class="dropdown-item" type="button" value="Custom" @click="addTask">Custom</button></li>
+            <li><button class="dropdown-item" type="button" value="Random" @click="addTask">Surprise Me!</button></li>
+            <li class="dropdown-divider"></li>
 
-        <ul class="dropdown-menu">
-          <li><button class="dropdown-item" type="button" value="Custom" @click="addTask">Custom</button></li>
-          <li><button class="dropdown-item" type="button" value="Random" @click="addTask">Surprise Me!</button></li>
-          <li class="dropdown-divider"></li>
+            <li class="dropdown-header"><h6>By Category</h6></li>
 
-          <li class="dropdown-header"><h6>By Category</h6></li>
+            <li class="dropdown-item"><label>Creative</label>
+              <ul class="sub-menu" v-for="preset in presets[0]" :key="preset.id">
+                  <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
+              </ul>
+            </li>
 
-          <li class="dropdown-item"><label>Creative</label>
-            <ul class="sub-menu" v-for="preset in presets[0]" :key="preset.id">
-                <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
-            </ul>
-          </li>
+            <li class="dropdown-item"><label>Mental</label>
+              <ul class="sub-menu" v-for="preset in presets[1]" :key="preset.id">
+                  <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
+              </ul>
+            </li>
 
-          <li class="dropdown-item"><label>Mental</label>
-            <ul class="sub-menu" v-for="preset in presets[1]" :key="preset.id">
-                <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
-            </ul>
-          </li>
+            <li class="dropdown-item"><label>Physical</label>
+              <ul class="sub-menu" v-for="preset in presets[2]" :key="preset.id">
+                  <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
+              </ul>
+            </li>
 
-          <li class="dropdown-item"><label>Physical</label>
-            <ul class="sub-menu" v-for="preset in presets[2]" :key="preset.id">
-                <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
-            </ul>
-          </li>
+            <li class="dropdown-item"><label>Social</label>
+              <ul class="sub-menu" v-for="preset in presets[3]" :key="preset.id">
+                  <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
+              </ul>
+            </li>
+          </ul>
 
-          <li class="dropdown-item"><label>Social</label>
-            <ul class="sub-menu" v-for="preset in presets[3]" :key="preset.id">
-                <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
-            </ul>
-          </li>
-
-        </ul>
 
         <button class="btn btn-outline-light toggleButtons current" v-bind:class="{ active: activeButton === 'toggleButtons current' }" @click="toggleCurrentTasks">Show Current</button>
         <button class="btn btn-outline-light toggleButtons complete" v-bind:class="{ active: activeButton === 'toggleButtons complete' }" @click="toggleCompleteTasks">Show Complete</button>
