@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LandingPage from './components/LandingPage.vue'
-import UserDashboard from './components/UserDashboard.vue';
-import UserProfile from './components/UserProfile.vue';
-import TaskList from './components/TaskList.vue';
+import UserDashboard from './components/UserDashboard.vue'
+import UserProfile from './components/UserProfile.vue'
+import TaskList from './components/TaskList.vue'
+import GratitudeBoard from './components/GratitudeBoard.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -21,7 +22,11 @@ export default createRouter({
     },
     {
       path: '/profile',
-      component:UserProfile,
+      component: UserProfile,
+    },
+    {
+      path: '/board',
+      component: GratitudeBoard
     }
   ]
 })

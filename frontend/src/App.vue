@@ -2,19 +2,19 @@
 import PageHeader from './components/PageHeader.vue'
 import Navbar from './components/Navbar.vue';
 import PageFooter from './components/PageFooter.vue'
-import DashboardNavbar from './components/DashboardNavbar.vue'
 </script>
 
 <template>
-    <header class="p-2 bg-gradient">
+
+    <header class="container-fluid p-2 bg-gradient">
       <PageHeader />
     </header>
 
-    <nav>
+    <nav class="container-fluid bg-gradient">
       <Navbar />
     </nav>
 
-    <main>
+    <main class="container-fluid">
       <Suspense>
         <router-view />
         <template #fallback>
@@ -23,9 +23,10 @@ import DashboardNavbar from './components/DashboardNavbar.vue'
       </Suspense>
     </main>
 
-    <footer class="p-2 bg-gradient">
+    <footer class="container-fluid bg-gradient">
       <PageFooter />
     </footer>
+
 </template>
 
 <style scoped>

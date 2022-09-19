@@ -1,11 +1,12 @@
 <template>
-  <div class="dashboard bg-wrapper bg-gradient">
-    <nav>
+  <div class="container-fluid p-2 dashboard bg-wrapper bg-gradient">
+
+    <div class="dashNav container-fluid p-2 mt-2 mb-2">
       <DashboardNavbar />
-    </nav>
+    </div>
 
     <div class="toggleButtons">
-      <div class="btn-group btn-group-sm btn-group__activities" role="group" aria-label="Task List Buttons">
+      <div class="container-fluid p-2 btn-group btn-group-sm btn-group__activities" role="group" aria-label="Task List Buttons">
         
           <button class="btn btn-dark dropdown-toggle" @click="toggleHidden" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             New Activity
@@ -24,7 +25,7 @@
             </li>
 
             <li class="dropdown-item"><label>Mental</label>
-              <ul class="sub-menu" v-for="preset in presets[1]" :key="preset.id">
+              <ul class="addTask sub-menu" v-for="preset in presets[1]" :key="preset.id">
                   <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
               </ul>
             </li>
@@ -51,7 +52,7 @@
 
     </div>
 
-      <section v-show="!isHidden" class="content addForm" ref="addForm">
+      <section v-show="!isHidden" class="container-fluid p-2 content addForm" ref="addForm">
         <form ref="addTaskForm" v-on:submit.prevent="postTask">
           <ul>
             <li>
@@ -80,12 +81,12 @@
         </form>
       </section>
 
-    <div class="tasks taskList">
-        <ul class="vstack taskList">
+    <div class="container-fluid p-2 tasks taskList">
+        <ul class="taskList">
           <li v-for="task in tasks[0]" :key="task.id">
             <div v-if="user.sub === task.owner">
-              <div class="list-group taskList__child">
-                <div class="card" style="width: 21rem;">
+              <div class="container-fluid list-group taskList__child">
+                <div class="container-fluid card">
                   <div class="card-body" style="color:black;">
                     <h5 class="display-5 card-title">{{ task.title }}</h5>
                     <h6 class="card-subtitle mb-3 text-muted">{{ task.duration }} minutes</h6>
@@ -93,7 +94,7 @@
                   </div>
 
                 <div class="card-body text-left">
-                  <div class="btn-group" role="group">
+                  <div class="container-fluid p-2 text-center btn-group" role="group">
                     <button class="btn btn-dark" v-if="!task.canEdit" @click="task.canEdit = !task.canEdit" id="editButton">Edit</button>
                     <button class="btn btn-light" v-else @click="editTask(task).then(toggleCanEdit)" id="submitButton">Submit</button>
                     <button class="btn btn-secondary" @click="deleteTask(task)">Remove</button><br>

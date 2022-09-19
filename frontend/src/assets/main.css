@@ -3,32 +3,37 @@
 /* General Styling */
 #app {
   max-width: 1280px;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0;
   padding: 0;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
   color: white;
   font-weight: normal;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.container-fluid {
+  padding: 0;
+}
+
 body {
-  background-color: black;
+  background-image: url('/img/dashbackground1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: lightpink;
 }
 
 header {
   background-color: darkslateblue;
   text-align: center;
-  min-width: 100vw;
+
 }
 main {
   display: flex;
-  flex-flow: column nowrap;
-  font-size: 4vw;
-  justify-content: space-between;
-  min-width: 100vw;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 footer {
@@ -37,8 +42,6 @@ footer {
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-  margin-top: auto;
-  min-width: 100vw;
   color: lavenderblush;
 }
 
@@ -59,6 +62,7 @@ footer .footer-contact {
   flex: 2;
   display: flex;
   flex-flow: column nowrap;
+  padding: 0 2.4vw;
 }
 
 footer .footer-contact button {
@@ -81,10 +85,6 @@ footer .text-container {
   transition: 0.4s;
 }
 
-.active {
-  border: solid 2px yellow;
-}
-
 
 /* Navbar Styling */
 ul {
@@ -94,24 +94,29 @@ ul {
 }
 
 li {
-  font-size: 4.8vw;
   margin: 3.6vw;
 }
 
 .navbar {
-  background-color: lavender !important;
-  padding: 1vw;
-  min-width: 100vw;
+  display: flex;
+  flex-flow: row wrap;
+  background-color: ghostwhite !important;
+  padding: 0 1.2vw;
 }
 
-.navbar-brand {
-
-}
-.nav-link {
+.offcanvas {
+  background-color: ghostwhite;
 }
 
+.offcanvas a {
+  color: lavenderblush;
+}
 
 /* LandingPage Styling */
+.img-fluid {
+  box-shadow: 0.8vw 1.2vw lightcyan;
+}
+
 .content.bg-wrapper::before {
   content: "";
   position: absolute;
@@ -119,10 +124,31 @@ li {
   bottom: 0;
   left: 0;
   right: 0;
-  background-image: url('img/rainbow_door.jpg');
+  background-image: url('/img/rainbow_door.jpg');
   background-size: cover;
-  opacity: 0.75;
+  opacity: 1;
+}
 
+.content--intro {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+
+.content--intro .img-fluid {
+}
+
+.content--call {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.content--call  button {
+  background-color: darkslateblue !important;
+  border-color: lavender !important;
+  color: lavender !important;
 }
 
 .content--get-started {
@@ -130,11 +156,9 @@ li {
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-
 }
 
 .content--get-started  button {
-  min-width: 64vw;
   background-color: darkslateblue !important;
   border-color: lavender !important;
   color: lavender !important;
@@ -142,7 +166,7 @@ li {
 
 .content--get-started figure {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   justify-content: center;
   align-items: center;
 }
@@ -155,20 +179,19 @@ li {
 .content--features {
   display: flex;
   flex-flow: column wrap;
-}
-
-.content--features .img-container {
-  flex: 1;
-  display: flex;
-  flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  gap: 4vw 12vw;
 }
 
-.content--features .img-fluid {
-  max-width: 30%;
-  height: auto;
+.content--features .active {
+  border-color: lightyellow;
+}
+
+.content--share .img-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .content--about {
@@ -180,7 +203,7 @@ li {
 
 .content--about figure {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   justify-content: center;
   align-items: center;
 }
@@ -198,9 +221,10 @@ li {
   bottom: 0;
   left: 0;
   right: 0;
-  background-image: url('img/dashbackground1.jpg');
+  background-image: url('/img/dashbackground1.jpg');
   background-size: cover;
   background-color: black;
+  padding: 0 2.4vw;
 }
 
 .dashboard a {
@@ -208,9 +232,22 @@ li {
 }
 
 /* UserProfile styling*/
+.profile {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-control.active{
+  border: 4px solid yellow;
+}
 
 
 /* TaskList Styling*/
+.card {
+  width: 21rem;
+}
 .btn.btn-primary {
 
 }
@@ -229,6 +266,14 @@ li {
 }
 
 
+/* Gratitude Board Styling*/
+.toolbar {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+
+
 
 /* Media Settings */
 @media (hover: hover) {
@@ -237,11 +282,90 @@ li {
   }
 }
 
-@media (min-width: 1024px) {
-  body {
-  }
+@media (min-width: 768px) {
 
   #app {
+    padding: 0 9.6vw;
+  }
+
+  body {
+
+  }
+
+  header {
+
+  }
+
+  footer {
+
+
+  }
+
+  .navbar {
+
+  }
+
+  .content {
+
+  }
+
+  main {
+
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin: 3.6vw;
+}
+
+  .lead {
+
+  }
+
+  .figure-caption {
+    font-size: 1.2vw;
+    margin: 0.8vw;
+  }
+
+  .dashNav {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: left;
+  }
+
+  .dashNav button {
+    width: 9.6vw;
+  }
+
+  .sub-menu {
     max-width: 10%;
   }
+
+  ul.dropdown-menu.show {
+    max-width: 50%;
+    margin: 0;
+    padding: 0;
+  }
+
+  li.dropdown-item {
+    margin: 0;
+    padding: 0 1.2vw;
+  }
+
+  .card {
+    width: 36rem;
+  }
+
+  .addForm {
+    max-width: 64%;
+  }
+
+  .details, .profile input {
+    max-width: 64%;
+  }
+
 }

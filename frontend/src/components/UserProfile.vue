@@ -1,36 +1,39 @@
 <template>
-  <div class="dashboard bg-wrapper bg-gradient">
-  <nav>
-    <DashboardNavbar />
-  </nav>
-    <section>
-      <h1>My Profile -- <span><button class="btn  btn-sm btn-secondary" :class="{active: canEdit}" @click="toggleCanEdit">Edit</button></span></h1>
+  <div class="container-fluid dashboard bg-wrapper bg-gradient">
 
+    <div class="dashNav container-fluid p-2 mt-2 mb-2">
+      <DashboardNavbar />
+    </div>
 
-      <label>Avatar</label><img v-bind:src="avatar" alt="The users current profile picture.">
-      <section>
-      <span><label>Details</label></span><br>
-        <span><label>Email</label><input v-bind:disabled="canEdit" readonly v-model="user.email"></span>
-      </section>
+    <section class="container-fluid p-3 mb-3">
+      <h2 class="display-2 text-center">My Profile</h2>
 
-      <div>
-        <form v-on:submit.prevent="editMetaData">
-          <label>Preferred Name</label>
-          <input v-model="preferredName" type="text" name="preferredName" placeholder="New Name" v-bind:readonly="!canEdit">
-          <label>Display Name</label>
-          <input v-model="displayName" type="text" name="displayName" placeholder="New Name" v-bind:readonly="!canEdit">
+      <div class="profile container-fluid p-3 mb-3">
+        <label class="p-3">Display Picture</label>
+        <img class="img-fluid img-thumbnail mb-3" v-bind:src="avatar" alt="The users current profile picture.">
 
-          <section>
-          <span><label>Social Networks</label></span>
-          <ul>
-            <li v-for="network in socialNetworks" :key="network.net">
-              <label>{{ network.net }}</label>
-              <input v-model="network.acct" type="text" v-bind:readonly="!canEdit">
-            </li>
-          </ul>
-          </section>
+        <label class="form-label p-3">Email</label>
+        <input class="form-control p-3 mb-3" readonly v-model="user.email">
+      </div>
 
-          <button class="btn btn-secondary" type="submit" value="submit" v-bind:disabled="!canEdit">Submit</button>
+      <div class="details container-fluid">
+        <form class="form-control" v-bind:class="{active: canEdit}" v-on:submit.prevent="editMetaData">
+          <label class="form-label p-2" for="preferredName"><strong>Preferred Name</strong></label>
+          <input class="form-control p-2 mb-2" v-model="preferredName" type="text" id="preferredName" placeholder="New Name" v-bind:readonly="!canEdit">
+
+          <label class="form-label p-2" for="displayName"><strong>Display Name</strong></label>
+          <input class="form-control p-2 mb-2" v-model="displayName" type="text" id="displayName" placeholder="New Name" v-bind:readonly="!canEdit">
+          <br>
+          <dl>
+            <dt><label class="p-2 mb-2"><strong>Social Networks</strong></label></dt>
+            <dt v-for="network in socialNetworks" :key="network.net">
+                <label class="form-label p-2 mb-2" for="socialNetwork">{{ network.net }}</label>
+                <input class="form-control p-2 mb-2" v-model="network.acct" type="text" id="socialNetwork" v-bind:readonly="!canEdit">
+            </dt>
+          </dl>
+
+          <button v-if="canEdit" class="btn btn-secondary" type="submit" value="submit">Submit</button>
+          <button v-else class="btn btn-secondary" @click="toggleCanEdit">Edit</button>
         </form>
       </div>
     </section>
@@ -54,10 +57,10 @@ export default {
     const displayName = ref('')
     const preferredName = ref('')
     const socialNetworks = reactive([
-        {'net': 'facebook', acct: ''},
-        {'net': 'instagram', acct: ''},
-        {'net': 'twitter', acct: ''},
-        {'net': 'tiktok', acct: ''},
+        {'net': 'Facebook', acct: ''},
+        {'net': 'Instagram', acct: ''},
+        {'net': 'Twitter', acct: ''},
+        {'net': 'TikTok', acct: ''},
     ])
     const canEdit = ref(false)
     const toggleCanEdit = () => canEdit.value = !canEdit.value
@@ -83,7 +86,8 @@ export default {
 
     async function editMetaData() {
       const token = await getAccessTokenSilently();
-      const response = await axios.patch(`${MANAGEMENT_API}`, {
+      await axios.patch(`${MANAGEMENT_API}`, {
+        "user_metadata[preferred_name]": preferredName.value,
         "user_metadata[display_name]": displayName.value,
         "user_metadata[user_id]": user.value.sub,
         "user_metadata[social_networks][facebook]": socialNetworks[0].acct,
@@ -108,5 +112,9 @@ export default {
 </script>
 
 <style scoped>
+
+.img-thumbnail {
+  box-shadow: none;
+}
 
 </style>
