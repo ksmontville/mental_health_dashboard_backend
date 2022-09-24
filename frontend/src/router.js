@@ -4,6 +4,7 @@ import UserDashboard from './components/UserDashboard.vue'
 import UserProfile from './components/UserProfile.vue'
 import TaskList from './components/TaskList.vue'
 import GratitudeBoard from './components/GratitudeBoard.vue'
+import AboutPage from './components/AboutPage.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -27,6 +28,10 @@ export default createRouter({
     {
       path: '/board',
       component: GratitudeBoard
-    }
+    },
+    {
+      path: '/about',
+      component: AboutPage
+    },
   ]
 })

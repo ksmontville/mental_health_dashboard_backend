@@ -6,11 +6,11 @@ import PageFooter from './components/PageFooter.vue'
 
 <template>
 
-    <header class="container-fluid p-2 bg-gradient">
-      <PageHeader />
-    </header>
+<!--    <header class="container-fluid bg-gradient">-->
+<!--      <PageHeader />-->
+<!--    </header>-->
 
-    <nav class="container-fluid bg-gradient">
+    <nav class="container-fluid">
       <Navbar />
     </nav>
 
@@ -23,7 +23,7 @@ import PageFooter from './components/PageFooter.vue'
       </Suspense>
     </main>
 
-    <footer class="container-fluid bg-gradient">
+    <footer class="container-fluid">
       <PageFooter />
     </footer>
 

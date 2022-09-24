@@ -11,7 +11,7 @@
     </section>
 
     <section class="container-fluid p-3 mb-3">
-      Some kind of summary of recent activity here
+      Here's what you've been up to...
     </section>
 
   </div>

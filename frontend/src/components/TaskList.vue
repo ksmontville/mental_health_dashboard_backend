@@ -7,8 +7,8 @@
 
     <div class="toggleButtons">
       <div class="container-fluid p-2 btn-group btn-group-sm btn-group__activities" role="group" aria-label="Task List Buttons">
-        
-          <button class="btn btn-dark dropdown-toggle" @click="toggleHidden" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+          <button class="btn btn-dark dropdown-toggle" @click="" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             New Activity
           </button>
           <ul class="dropdown-menu">
@@ -16,27 +16,27 @@
             <li><button class="dropdown-item" type="button" value="Random" @click="addTask">Surprise Me!</button></li>
             <li class="dropdown-divider"></li>
 
-            <li class="dropdown-header"><h6>By Category</h6></li>
+            <li class="dropdown-header "><h6 class="display-6">By Category</h6></li>
 
-            <li class="dropdown-item"><label>Creative</label>
+            <li class="dropdown-item"><label class="menu-label">Creative</label>
               <ul class="sub-menu" v-for="preset in presets[0]" :key="preset.id">
                   <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
               </ul>
             </li>
 
-            <li class="dropdown-item"><label>Mental</label>
+            <li class="dropdown-item"><label class="menu-label">Mental</label>
               <ul class="addTask sub-menu" v-for="preset in presets[1]" :key="preset.id">
                   <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
               </ul>
             </li>
 
-            <li class="dropdown-item"><label>Physical</label>
+            <li class="dropdown-item"><label class="menu-label">Physical</label>
               <ul class="sub-menu" v-for="preset in presets[2]" :key="preset.id">
                   <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
               </ul>
             </li>
 
-            <li class="dropdown-item"><label>Social</label>
+            <li class="dropdown-item"><label class="menu-label">Social</label>
               <ul class="sub-menu" v-for="preset in presets[3]" :key="preset.id">
                   <li><button class="dropdown-item" type="button" :value="preset.title" @click="addTask">{{ preset.title }}</button></li>
               </ul>
@@ -76,6 +76,7 @@
 
             <li>
               <input class="btn btn-dark" type="submit" value="submit" @click="toggleHidden">
+              <button class="btn btn-dark m-2" @click="toggleHidden">cancel</button>
             </li>
           </ul>
         </form>
@@ -379,5 +380,23 @@ export default {
 </script>
 
 <style scoped>
+
+.form-control {
+  max-width: 36rem;
+}
+
+.menu-label {
+  font-size: 1.4rem;
+}
+
+.dropdown-item:active {
+  background-color: cyan;
+}
+
+.dropdown-item:hover {
+  color: darkslateblue;
+  background-color: lightcyan;
+}
+
 
 </style>

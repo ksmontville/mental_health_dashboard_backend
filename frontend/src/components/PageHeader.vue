@@ -1,6 +1,5 @@
 <template>
   <div class="container-fluid">
-    <router-link to="/"><h1 class="display-1">MasterMind</h1></router-link>
     <figure class="text-center">
       <blockquote class="blockquote" style="color: lightcyan">
         <small>Change what you can, manage what you can't.</small>
