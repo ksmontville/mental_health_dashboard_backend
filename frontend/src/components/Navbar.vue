@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-bg-light bg-gradient">
     <div class="container-fluid p-2" id="navbar">
-      <router-link to="/" v-if="isAuthenticated" class="navbar-brand">Home</router-link>
+      <router-link to="/dashboard" v-if="isAuthenticated" class="navbar-brand">Logg in as: {{ user.nickname }}</router-link>
       <router-link to="/dashboard" v-else v-on:click="login" class="navbar-brand">Log In | Register</router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
               aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,6 +9,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarToggler">
         <div class="navbar-nav">
+          <router-link to="/" class="nav-link">Home</router-link>
           <router-link to="/about" class="nav-link">About</router-link>
           <router-link to="#" class="nav-link text-decoration-line-through">Media</router-link>
           <router-link to="#" class="nav-link text-decoration-line-through">Resources</router-link>
