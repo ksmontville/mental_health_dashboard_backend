@@ -3,4 +3,4 @@
 venv
 
 # Vue/misc frontend files
-frontend
+/frontend
