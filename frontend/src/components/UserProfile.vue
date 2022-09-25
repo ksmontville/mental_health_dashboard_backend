@@ -50,7 +50,7 @@ const MANAGEMENT_API = "https://dli-backend.herokuapp.com/api/users/management"
 export default {
   name: "UserProfile",
 
-  setup() {
+  async setup() {
     const {user, isAuthenticated, getAccessTokenSilently} = useAuth0()
 
     const avatar = ref('')
@@ -65,7 +65,7 @@ export default {
     const canEdit = ref(false)
     const toggleCanEdit = () => canEdit.value = !canEdit.value
 
-    getMetaData()
+    await getMetaData()
 
     async function getMetaData() {
       const token = await getAccessTokenSilently();

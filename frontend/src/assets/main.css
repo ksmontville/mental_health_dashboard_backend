@@ -42,9 +42,8 @@ main {
 
 footer {
   background: none;
-  /*background-color: transparent;*/
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   justify-content: center;
   align-items: center;
   color: white;
@@ -60,14 +59,20 @@ footer a {
 
 .footer__content__top {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 footer .footer-contact {
-  flex: 2;
+  flex: 1;
   display: flex;
   flex-flow: column nowrap;
   padding: 0 2.4vw;
+}
+
+footer .form-floating {
+
 }
 
 footer .footer-contact button {
@@ -143,19 +148,6 @@ li {
 
 .transparent__text {
 }
-
-/*.content.bg-wrapper::before {*/
-/*  content: "";*/
-/*  position: absolute;*/
-/*  top: 0;*/
-/*  bottom: 0;*/
-/*  left: 0;*/
-/*  right: 0;*/
-/*  background-image: url('/img/rainbow_door.jpg');*/
-/*  background-size: cover;*/
-/*  background-repeat: no-repeat;*/
-/*  opacity: 1;*/
-/*}*/
 
 .content--intro {
   display: flex;
@@ -242,6 +234,13 @@ li {
 }
 
 /* UserDashboard Styling */
+/*.dashboard.bg-wrapper {*/
+/*  background-image: url('/img/dashbackground1.jpg');*/
+/*  background-size: cover;*/
+/*  background-position: center;*/
+/*  background-attachment: fixed;*/
+/*}*/
+
 .dashboard.bg-wrapper::before {
   content: '';
   position: absolute;
@@ -253,6 +252,14 @@ li {
   background-size: cover;
   background-color: black;
   padding: 0 2.4vw;
+}
+
+.userDashboard {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+  align-items: flex-end;
+
 }
 
 .dashboard a {
@@ -275,7 +282,7 @@ li {
 /* TaskList Styling*/
 .taskList {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
 }
@@ -291,7 +298,8 @@ li {
 }
 
 .toggleButtons {
-  max-width: 48vw;
+  display: flex;
+  flex-flow: column nowrap;
 }
 
 .btn-group__activities {
@@ -385,7 +393,6 @@ li {
   }
 
   ul.dropdown-menu.show {
-    max-width: 50%;
     margin: 0;
     padding: 0;
   }
