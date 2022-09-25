@@ -1,3 +1,4 @@
 # Environment Variables
-
+.env
+/venv
 # Vue/misc frontend files
